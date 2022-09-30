@@ -4,6 +4,9 @@
 
     <!--自动映射只可以映射数据库表的字段，非数据库表的字段不能映射-->
     <resultMap id="baseAttrInfoMap" type="com.atguigu.gmall.model.product.BaseAttrInfo" autoMapping="true">
+        <!--一对多关系是一的那个id要配置出来-->
+        <id property="id" column="id"/>
+        <!--配置多的对象-->
         <collection property="attrValueList" ofType="com.atguigu.gmall.model.product.BaseAttrValue" autoMapping="true">
             <id property="id" column="attr_value_id"/>
         </collection>
@@ -15,7 +18,7 @@
         bai.attr_name,
         bai.category_id,
         bai.category_level,
-        bav.id as arrt_value_id,
+        bav.id as attr_value_id,
         bav.value_name,
         bav.attr_id
         from base_attr_info bai
@@ -31,5 +34,19 @@
                 or (bai.category_id = #{category3Id} and bai.category_level = 3)
             </if>
         </where>
+    </select>
+
+    <select id="getAttrListBySkuId" resultMap="baseAttrInfoMap">
+        select bai.id,
+               bai.attr_name,
+               bai.category_id,
+               bai.category_level,
+               bav.id attr_value_id,
+               bav.value_name,
+               bav.attr_id
+        from base_attr_info bai
+                 inner join base_attr_value bav on bai.id = bav.attr_id
+                 inner join sku_attr_value sav on sav.value_id = bav.id
+        where sav.sku_id = #{skuId}
     </select>
 </mapper>

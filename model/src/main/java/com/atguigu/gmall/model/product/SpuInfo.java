@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * </p>
  *
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "SpuInfo")
 @TableName("spu_info")

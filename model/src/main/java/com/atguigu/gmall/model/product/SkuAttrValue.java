@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -13,6 +14,7 @@ import lombok.Data;
  * </p>
  *
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "Sku平台属性值")
 @TableName("sku_attr_value")

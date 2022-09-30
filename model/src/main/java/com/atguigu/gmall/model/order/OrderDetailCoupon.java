@@ -1,14 +1,17 @@
 package com.atguigu.gmall.model.order;
 
 import com.atguigu.gmall.model.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "订单优惠券关联表")
 @TableName("order_detail_coupon")
@@ -33,7 +36,7 @@ public class OrderDetailCoupon extends BaseEntity {
    private Long skuId;
 
    @ApiModelProperty(value = "创建时间")
-   @TableField("create_time")
+   @TableField(value = "create_time",fill = FieldFill.INSERT)
    private Date createTime;
 
 }

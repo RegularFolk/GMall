@@ -2,17 +2,20 @@ package com.atguigu.gmall.model.order;
 
 import com.atguigu.gmall.model.activity.CouponInfo;
 import com.atguigu.gmall.model.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "订单信息")
 @TableName("order_info")
@@ -60,7 +63,7 @@ public class OrderInfo extends BaseEntity {
     private String tradeBody;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField("create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     @ApiModelProperty(value = "失效时间")
@@ -116,7 +119,7 @@ public class OrderInfo extends BaseEntity {
 
     @ApiModelProperty(value = "操作时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField("operate_time")
+    @TableField(value = "operate_time", fill = FieldFill.UPDATE)
     private Date operateTime;
 
     //  计算活动或者优惠劵的金额
@@ -127,17 +130,17 @@ public class OrderInfo extends BaseEntity {
     private CouponInfo couponInfo;
 
     // 计算总价格
-    public void sumTotalAmount(){
+    public void sumTotalAmount() {
         BigDecimal totalAmount = new BigDecimal("0");
         BigDecimal originalTotalAmount = new BigDecimal("0");
         BigDecimal couponAmount = new BigDecimal("0");
         //  减去优惠劵
-        if(null != couponInfo) {
+        if (null != couponInfo) {
             couponAmount = couponAmount.add(couponInfo.getReduceAmount());
             totalAmount = totalAmount.subtract(couponInfo.getReduceAmount());
         }
         //  减去活动
-        if(null != this.getActivityReduceAmount()) {
+        if (null != this.getActivityReduceAmount()) {
             totalAmount = totalAmount.subtract(this.getActivityReduceAmount());
         }
         //  计算最后

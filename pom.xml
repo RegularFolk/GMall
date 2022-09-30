@@ -8,6 +8,9 @@
         <module>model</module>
         <module>service</module>
         <module>server-gateway</module>
+        <module>service-client</module>
+        <module>web</module>
+        <module>ware-manage</module>
     </modules>
 
     <!--引入spring boot 父工程-->
@@ -89,6 +92,11 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

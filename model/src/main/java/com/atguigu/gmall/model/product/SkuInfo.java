@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,11 +19,13 @@ import java.util.List;
  * </p>
  *
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "SkuInfo")
 @TableName("sku_info")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SkuInfo extends BaseEntity {
-
 
 //    public SkuInfo(){}
 //	public SkuInfo(Long skuId){

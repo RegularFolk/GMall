@@ -2,17 +2,25 @@ package com.atguigu.gmall.model.cart;
 
 import com.atguigu.gmall.model.activity.CouponInfo;
 import com.atguigu.gmall.model.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "购物车")
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartInfo extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -45,11 +53,11 @@ public class CartInfo extends BaseEntity {
     private Integer isChecked = 1;
 
     //  ,fill = FieldFill.INSERT
-    @TableField(value = "create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Timestamp createTime;
 
     //  ,fill = FieldFill.INSERT_UPDATE)
-    @TableField(value = "update_time")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Timestamp updateTime;
 
     // 实时价格 skuInfo.price

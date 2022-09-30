@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result error(Exception e){
         e.printStackTrace();
-        return Result.fail();
+        return Result.fail(e.getMessage());
     }
 
     /**

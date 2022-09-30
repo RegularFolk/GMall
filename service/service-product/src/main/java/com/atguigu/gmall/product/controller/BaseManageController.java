@@ -3,7 +3,10 @@ package com.atguigu.gmall.product.controller;
 import com.atguigu.gmall.common.result.Result;
 import com.atguigu.gmall.model.product.*;
 import com.atguigu.gmall.product.service.ManageService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,6 +66,28 @@ public class BaseManageController {
         if (attrInfo != null) {
             return Result.ok(attrInfo.getAttrValueList());
         }
+        return Result.ok();
+    }
+
+    @ApiOperation("分页查询Sku信息")
+    @GetMapping("/list/{page}/{limit}")
+    public Result<IPage<SkuInfo>> index(@PathVariable("page") Long page,
+                                        @PathVariable("limit") Long limit) {
+        Page<SkuInfo> page1 = new Page<>(page, limit);
+        return Result.ok(manageService.getPage(page1));
+    }
+
+    @ApiOperation("商品上架")
+    @GetMapping("onSale/{skuId}")
+    public Result<Object> onSale(@PathVariable("skuId") Long skuId) {
+        manageService.onSale(skuId);
+        return Result.ok();
+    }
+
+    @ApiOperation("商品下架")
+    @GetMapping("cancelSale/{skuId}")
+    public Result<Object> cancelSale(@PathVariable("skuId") Long skuId) {
+        manageService.cancelSale(skuId);
         return Result.ok();
     }
 
