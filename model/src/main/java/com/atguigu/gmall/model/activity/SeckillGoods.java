@@ -1,15 +1,18 @@
 package com.atguigu.gmall.model.activity;
 
 import com.atguigu.gmall.model.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "SeckillGoods")
 @TableName("seckill_goods")
@@ -42,7 +45,7 @@ public class SeckillGoods extends BaseEntity {
 	private BigDecimal costPrice;
 
 	@ApiModelProperty(value = "添加日期")
-	@TableField("create_time")
+	@TableField(value = "create_time",fill = FieldFill.INSERT)
 	private Date createTime;
 
 	@ApiModelProperty(value = "审核日期")

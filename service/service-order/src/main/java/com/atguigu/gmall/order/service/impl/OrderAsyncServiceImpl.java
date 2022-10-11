@@ -9,6 +9,7 @@ import com.atguigu.gmall.model.user.UserAddress;
 import com.atguigu.gmall.order.mapper.OrderDetailMapper;
 import com.atguigu.gmall.order.mapper.OrderInfoMapper;
 import com.atguigu.gmall.order.service.OrderAsyncService;
+import com.atguigu.gmall.order.service.OrderService;
 import com.atguigu.gmall.user.client.UserFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

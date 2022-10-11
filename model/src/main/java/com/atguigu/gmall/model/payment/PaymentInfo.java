@@ -3,11 +3,13 @@
 package com.atguigu.gmall.model.payment;
 
 import com.atguigu.gmall.model.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +20,7 @@ import java.util.Date;
  * </p>
  *
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "支付信息")
 @TableName("payment_info")
@@ -54,7 +57,7 @@ public class PaymentInfo extends BaseEntity {
 	private String paymentStatus;
 
 	@ApiModelProperty(value = "创建时间")
-	@TableField("create_time")
+	@TableField(value = "create_time",fill = FieldFill.INSERT)
 	private Date createTime;
 
 	@ApiModelProperty(value = "回调时间")

@@ -30,6 +30,18 @@ public class OrderDegradeFeignClient implements FallbackFactory<OrderFeignClient
                 printCause();
                 return null;
             }
+
+            @Override
+            public OrderInfo getOrderInfo(Long orderId) {
+                printCause();
+                return null;
+            }
+
+            @Override
+            public Long submitSeckillOrder(OrderInfo orderInfo) {
+                printCause();
+                return null;
+            }
         };
     }
 }

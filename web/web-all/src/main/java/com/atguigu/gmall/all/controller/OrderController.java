@@ -20,4 +20,5 @@ public class OrderController {
         model.addAllAttributes(map);
         return "order/trade";
     }
+
 }

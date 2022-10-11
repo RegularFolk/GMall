@@ -18,4 +18,5 @@ public interface OrderAsyncService {
     Future<OrderInfo> insertAsync(OrderInfo orderInfo);
 
     void deleteTradeNo(String userId);
+
 }

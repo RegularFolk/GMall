@@ -204,7 +204,7 @@ public class GwareServiceImpl implements GwareService {
             // http://order.gmall.com/orderSplit?orderId=xxx&wareSkuMap=xxx
             String resultJson = HttpclientUtil.doPost(ORDER_URL, map);
             List<WareOrderTask> wareOrderTaskList = JSON.parseArray(resultJson, WareOrderTask.class);
-            if (wareOrderTaskList.size() >= 2) {
+            if (wareOrderTaskList != null && wareOrderTaskList.size() >= 2) {
                 for (WareOrderTask subOrderTask : wareOrderTaskList) {
                     subOrderTask.setTaskStatus(TaskStatus.DEDUCTED.name());
                     saveWareOrderTask(subOrderTask);

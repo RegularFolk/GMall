@@ -2,9 +2,12 @@ package com.atguigu.gmall.product.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.atguigu.gmall.common.cache.GmallCache;
+import com.atguigu.gmall.common.constant.MqConst;
 import com.atguigu.gmall.common.constant.RedisConst;
+import com.atguigu.gmall.common.service.RabbitService;
 import com.atguigu.gmall.model.product.*;
 import com.atguigu.gmall.product.mapper.*;
+import com.atguigu.gmall.product.service.ManageAsyncService;
 import com.atguigu.gmall.product.service.ManageService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -80,6 +83,12 @@ public class ManageServiceImpl implements ManageService {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private ManageAsyncService manageAsyncService;
+
+    @Autowired
+    private RabbitService rabbitService;
 
     @GmallCache(prefix = "category1:")
     @Override
@@ -257,20 +266,16 @@ public class ManageServiceImpl implements ManageService {
         return skuInfoMapper.selectPage(page, wrapper);
     }
 
-    @Override
+    @Override//异步发送消息到service-list接收
     public void onSale(Long skuId) {
-        SkuInfo skuInfo = new SkuInfo();
-        skuInfo.setId(skuId);
-        skuInfo.setIsSale(1);
-        skuInfoMapper.updateById(skuInfo);
+        manageAsyncService.onSaleAsync(skuId);
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_GOODS, MqConst.ROUTING_GOODS_UPPER, skuId);
     }
 
-    @Override
+    @Override//异步发送消息到service-list接收
     public void cancelSale(Long skuId) {
-        SkuInfo skuInfo = new SkuInfo();
-        skuInfo.setId(skuId);
-        skuInfo.setIsSale(0);
-        skuInfoMapper.updateById(skuInfo);
+        manageAsyncService.cancelSaleAsync(skuId);
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_GOODS, MqConst.ROUTING_GOODS_LOWER, skuId);
     }
 
     @GmallCache(prefix = RedisConst.SKUKEY_PREFIX)

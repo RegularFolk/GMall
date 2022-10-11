@@ -85,7 +85,7 @@
                     <span><em>已节省：</em><i></i></span>
                 </div>
                 <div class="sumbtn">
-                    <a class="sum-btn" href="javascript:" @click="trade()">结算</a>
+                    <a class="sum-btn" href="javascript:" @click="seckillTrade()">结算</a>
                 </div>
             </div>
         </div>
@@ -379,7 +379,7 @@
                 })
             },
 
-            trade() {
+            seckillTrade() {
                 debugger
                 if(!auth.isLogin()) {
                     window.location.href = 'http://www.gmall.com/login.html?originUrl='+window.location.href
@@ -394,7 +394,7 @@
                     }
                 }
                 if(isChecked == 1) {
-                    window.location.href = 'http://order.gmall.com/trade.html'
+                    window.location.href = 'http://order.gmall.com/seckillTrade.html'
                 } else {
                     alert('请选择购买的商品')
                 }

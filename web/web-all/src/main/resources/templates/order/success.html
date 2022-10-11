@@ -190,7 +190,7 @@
 </div>
 <!--页面底部END-->
 <!--页面底部END-->
-<script src="/js/api/trade.js"></script>
+<script src="/js/api/seckillTrade.js"></script>
 <script th:inline="javascript">
 	var item = new Vue({
 		el: '#item',
@@ -206,7 +206,7 @@
 
         methods: {
             init() {
-                trade.getPayOrderInfo(this.orderId).then(response => {
+                seckillTrade.getPayOrderInfo(this.orderId).then(response => {
                     this.data = response.data.data
                     console.log('成功')
                 })

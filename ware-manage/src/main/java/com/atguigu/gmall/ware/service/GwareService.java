@@ -13,29 +13,29 @@ import java.util.Map;
  * @return
  */
 public interface GwareService {
-    public Integer  getStockBySkuId(String skuid);
+    Integer  getStockBySkuId(String skuid);
 
-    public boolean  hasStockBySkuId(String skuid, Integer num);
+    boolean  hasStockBySkuId(String skuid, Integer num);
 
-    public List<WareInfo> getWareInfoBySkuid(String skuid);
+    List<WareInfo> getWareInfoBySkuid(String skuid);
 
-    public void addWareInfo();
+    void addWareInfo();
 
-    public Map<String,List<String>> getWareSkuMap(List<String> skuIdlist);
+    Map<String,List<String>> getWareSkuMap(List<String> skuIdlist);
 
-    public void addWareSku(WareSku wareSku);
+    void addWareSku(WareSku wareSku);
 
-    public void deliveryStock(WareOrderTask taskExample) ;
+    void deliveryStock(WareOrderTask taskExample) ;
 
-    public WareOrderTask saveWareOrderTask(WareOrderTask wareOrderTask);
+    WareOrderTask saveWareOrderTask(WareOrderTask wareOrderTask);
 
-    public  List<WareOrderTask>   checkOrderSplit(WareOrderTask wareOrderTask);
+    List<WareOrderTask>   checkOrderSplit(WareOrderTask wareOrderTask);
 
-    public void lockStock(WareOrderTask wareOrderTask);
+    void lockStock(WareOrderTask wareOrderTask);
 
-    public List<WareOrderTask> getWareOrderTaskList(WareOrderTask wareOrderTask);
+    List<WareOrderTask> getWareOrderTaskList(WareOrderTask wareOrderTask);
 
-    public List<WareSku> getWareSkuList();
+    List<WareSku> getWareSkuList();
 
-    public List<WareInfo> getWareInfoList();
+    List<WareInfo> getWareInfoList();
 }

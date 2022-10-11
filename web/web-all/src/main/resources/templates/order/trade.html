@@ -146,7 +146,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="clearfix trade">
+		<div class="clearfix seckillTrade">
 			<div class="fc-price">应付金额:　<span class="price" th:text="'￥'+${totalAmount}">¥0</span></div>
 			<div class="fc-receiverInfo">寄送至:
 				<span id="receive-address">{{order.deliveryAddress}}</span>
@@ -243,7 +243,7 @@
 </div>
 <!--页面底部END-->
 <!--页面底部END-->
-<script src="/js/api/trade.js"></script>
+<script src="/js/api/seckillTrade.js"></script>
 <script th:inline="javascript">
 	var item = new Vue({
 		el: '#item',
@@ -281,7 +281,7 @@
             },
 
             submitOrder() {
-                trade.submitOrder(this.order, this.tradeNo).then(response => {
+                seckillTrade.submitOrder(this.order, this.tradeNo).then(response => {
                     if (response.data.code == 200) {
                         window.location.href = 'http://payment.gmall.com/pay.html?orderId=' + response.data.data
                     } else {

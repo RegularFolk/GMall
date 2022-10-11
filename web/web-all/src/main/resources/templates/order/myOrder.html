@@ -369,7 +369,7 @@
 	</div>
 </div>
 <!--页面底部END-->
-<script src="/js/api/trade.js"></script>
+<script src="/js/api/seckillTrade.js"></script>
 <script th:inline="javascript">
 	var item = new Vue({
 		el: '#item',
@@ -389,7 +389,7 @@
                 if(pageNo < 1) pageNo = 1
                 if(pageNo >= this.pages) pageNo = this.pages
 
-                trade.getOrderPageList(pageNo,this.pageSize).then(response => {
+                seckillTrade.getOrderPageList(pageNo,this.pageSize).then(response => {
                     if (response.data.code == 200) {
                         this.data = response.data.data.records
                         this.pages = response.data.data.pages
@@ -398,7 +398,7 @@
             },
 
             gotoPage(page) {
-                trade.getOrderPageList(page,5).then(response => {
+                seckillTrade.getOrderPageList(page,5).then(response => {
                     this.data = response.data.data
                 })
             }

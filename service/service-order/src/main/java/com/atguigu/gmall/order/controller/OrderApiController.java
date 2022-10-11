@@ -1,5 +1,6 @@
 package com.atguigu.gmall.order.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.atguigu.gmall.cart.client.CartFeignClient;
 import com.atguigu.gmall.common.result.Result;
 import com.atguigu.gmall.common.util.AuthContextHolder;
@@ -117,5 +118,31 @@ public class OrderApiController {
         return Result.ok(orderId);
     }
 
+    @ApiOperation("回显订单和订单详细信息")
+    @GetMapping("inner/getOrderInfo/{orderId}")
+    public OrderInfo getOrderInfo(@PathVariable("orderId") Long orderId) {
+        return orderService.getOrderInfo(orderId);
+    }
+
+    @ApiOperation("拆单(用于订单系统调用)")
+    @PostMapping("orderSplit")
+    public String orderSplit(HttpServletRequest request) {
+        String orderId = request.getParameter("orderId");
+        String wareSkuMap = request.getParameter("wareSkuMap");//key为wareId value为skuId的map的集合
+        List<OrderInfo> orderInfos = orderService.orderSplit(orderId, wareSkuMap);
+        List<Map<String, Object>> maps = new ArrayList<>();
+        orderInfos.forEach(orderInfo -> {
+            Map<String, Object> map = orderService.getMapByOrderInfo(orderInfo);
+            maps.add(map);
+        });
+        return JSON.toJSONString(maps);
+    }
+
+    @ApiOperation("提交参与秒杀的订单接口")
+    @PostMapping("inner/seckill/submitOrder")
+    public Long submitSeckillOrder(@RequestBody OrderInfo orderInfo) {
+        //相比于正常的提交，省略了库存和价格的验证
+        return orderService.saveOrderInfo(orderInfo);
+    }
 
 }
